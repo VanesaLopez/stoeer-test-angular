@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { CommonModule } from '@angular/common';
 import { NavComponent } from './nav/nav.component';
+import { HeaderComponent } from './header/header.component';
 
 const config = new AuthServiceConfig([
   {
@@ -23,7 +24,8 @@ export function provideConfig() {
   declarations: [
     AppComponent,
     LoginComponent,
-    NavComponent
+    NavComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
