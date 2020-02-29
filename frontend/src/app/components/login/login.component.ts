@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { AuthService, GoogleLoginProvider, SocialUser } from 'angularx-social-login';
+import { AuthService, GoogleLoginProvider } from 'angularx-social-login';
 import { Subscription } from 'rxjs';
 
 @Component({
