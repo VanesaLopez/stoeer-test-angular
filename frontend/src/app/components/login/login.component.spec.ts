@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { LoginComponent } from './login.component';
 import { AuthService, AuthServiceConfig, GoogleLoginProvider } from 'angularx-social-login';
 import { By } from '@angular/platform-browser';
-import { Subscription } from 'rxjs';
+import { RouterTestingModule } from '@angular/router/testing';
 
 const config = new AuthServiceConfig([
   {
@@ -16,12 +16,13 @@ export function provideConfig() {
   return config;
 }
 
-describe('HeaderComponent', () => {
+describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [ RouterTestingModule ],
       declarations: [ LoginComponent ],
       providers: [
         AuthService,
@@ -42,14 +43,6 @@ describe('HeaderComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
-  });
-
-  it('subscription', () => {
-    const addSpy = spyOn(Subscription.prototype, 'add');
-
-    component.ngOnInit();
-
-    expect(addSpy).toHaveBeenCalled();
   });
 
   it('should be login', () => {
@@ -83,13 +76,5 @@ describe('HeaderComponent', () => {
     component.signOut();
 
     expect(signOutSpy).toHaveBeenCalled();
-  });
-
-  it('unsubscribe', () => {
-    const unsubscribeSpy = spyOn(Subscription.prototype, 'unsubscribe');
-
-    component.ngOnDestroy();
-
-    expect(unsubscribeSpy).toHaveBeenCalled();
-  });
+  });  
 });

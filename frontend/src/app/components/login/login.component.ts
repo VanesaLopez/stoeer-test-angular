@@ -1,30 +1,18 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { AuthService, GoogleLoginProvider } from 'angularx-social-login';
-import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html'
 })
-export class LoginComponent implements OnInit, OnDestroy {
-  loggedIn: boolean;
-  private subcriptions: Subscription = new Subscription();
+export class LoginComponent  {
+  @Input() loggedIn: boolean;
 
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) { }
-
-  ngOnInit(): void {
-    const sub = this.authService.authState.subscribe((user) => {
-      this.loggedIn = (user != null);
-    });
-
-    this.subcriptions.add(sub);
-  }
-
-  ngOnDestroy(): void {
-    this.subcriptions.unsubscribe();
-  }
 
   signInWithGoogle(): void {
     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
@@ -32,5 +20,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   signOut(): void {
     this.authService.signOut();
+    this.router.navigate(['']);
   }
 }
