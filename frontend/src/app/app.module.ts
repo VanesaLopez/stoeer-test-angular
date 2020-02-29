@@ -12,6 +12,8 @@ import { HeaderComponent } from './components/header/header.component';
 import { provideConfig } from './config/social-login';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HeaderInterceptor } from './interceptors/header.interceptor';
+import { UserModule } from './components/user/user.module';
+import { AuthGuardService } from './services/auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,8 @@ import { HeaderInterceptor } from './interceptors/header.interceptor';
     BrowserModule,
     AppRoutingModule,
     CommonModule,
-    SocialLoginModule
+    SocialLoginModule,
+    UserModule
   ],
   providers: [
     {
@@ -35,7 +38,8 @@ import { HeaderInterceptor } from './interceptors/header.interceptor';
       provide: HTTP_INTERCEPTORS,
       useClass: HeaderInterceptor,
       multi: true,
-    }
+    },
+    AuthGuardService
   ],
   bootstrap: [AppComponent]
 })
