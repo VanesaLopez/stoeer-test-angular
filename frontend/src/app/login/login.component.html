@@ -1,6 +1,6 @@
-<button *ngIf="!loggedIn" class="btn btn-outline-primary" (click)="signInWithGoogle()">
+<button *ngIf="!loggedIn" class="btn btn-outline-primary btn-up" (click)="signInWithGoogle()">
   Sign up
 </button>
-<button *ngIf="loggedIn" type="button" (click)="signOut()" class="btn btn-outline-primary">
+<button *ngIf="loggedIn" class="btn btn-outline-primary btn-out" (click)="signOut()">
   Sign Out
 </button>
