@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from 'src/app/services/user.service';
+import { User } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-user-list',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserListComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public userService: UserService
+  ) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
+    this.userService.getUserList();
+  }
+
+  trackByFn(index: number, user: User): number {
+    return user.id;
   }
 
 }

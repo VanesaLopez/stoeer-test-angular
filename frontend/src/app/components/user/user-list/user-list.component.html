@@ -1,1 +1,37 @@
-<p>user-list works!</p>
+<div class="container">
+    <table class="table">
+        <caption>List of users</caption>
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">IBAN</th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody *ngIf="userService.userList$ | async as users; else loading">            
+            <tr *ngFor="let user of users; trackBy: trackByFn">
+                <th scope="row">{{ user.id }}</th>
+                <td>{{ user.id }}</td>
+                <td>{{ user.id }}</td>
+                <td>{{ user.id }}</td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<ng-template #loading>
+    <tr>
+        <th colspan="6">
+            <div class="text-center m-5">
+                <div class="spinner-border" role="status">
+                <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+        </th>
+    </tr>
+</ng-template>
