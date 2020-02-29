@@ -26,11 +26,15 @@
 <ng-template #loading>
     <tr>
         <th colspan="6">
-            <div class="text-center m-5">
+            <div class="text-center m-5" *ngIf="userService.loading; else nothing">
                 <div class="spinner-border" role="status">
                 <span class="sr-only">Loading...</span>
                 </div>
             </div>
         </th>
     </tr>
+</ng-template>
+
+<ng-template #nothing>
+    <span class="text-center m-5">Nothing to display</span>
 </ng-template>

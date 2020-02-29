@@ -9,6 +9,7 @@ import { User } from '../models/user.model';
 export class UserService {
 
   public error: boolean;
+  public loading: boolean;
   public userList$: Observable<Array<User>> = new Observable<Array<User>>();
   private url = `${environment.apiURL}/api/users`;  
 
@@ -16,10 +17,15 @@ export class UserService {
 
   getUserList(): void {
     this.error = false;
+    this.loading = true;
     this.userList$ = this.httpClient.get<Array<User>>(this.url).pipe(
-      map(users => users.map(user => new User(user))),
+      map(users => users.map((user) => {
+        this.loading = false;
+        return new User(user);
+      })),
       catchError(err => {
         this.error = true;
+        this.loading = false;
         return new Observable<Array<User>>();
       })
     );
