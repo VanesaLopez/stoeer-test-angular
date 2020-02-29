@@ -4,8 +4,8 @@
         <caption>List of users</caption>
         <thead>
         <tr>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
+            <th scope="col">Name</th>
+            <th scope="col">Last Name</th>
             <th scope="col">IBAN</th>
             <th></th>
             <th></th>
@@ -16,8 +16,22 @@
                 <td>{{ user.first_name }}</td>
                 <td>{{ user.last_name }}</td>
                 <td>{{ user.iban }}</td>
-                <td></td>
-                <td></td>
+                <td>
+                    <button 
+                        [disabled]="user.creator !== creator"
+                        class="btn btn-outline-primary btn-out" 
+                        (click)="edit(user)">
+                            Edit
+                    </button>
+                </td>
+                <td>
+                    <button 
+                        [disabled]="user.creator !== creator"
+                        class="btn btn-outline-primary btn-out" 
+                        (click)="delete(user.id)">
+                            Delete
+                    </button>
+                </td>
             </tr>
         </tbody>
     </table>
@@ -36,5 +50,5 @@
 </ng-template>
 
 <ng-template #nothing>
-    <span class="text-center m-5">Nothing to display</span>
+    <div class="text-center">Nothing to display</div>
 </ng-template>

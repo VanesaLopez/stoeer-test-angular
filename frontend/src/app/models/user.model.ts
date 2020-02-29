@@ -1,6 +1,6 @@
 export class User {
     id: number;
-    creator: number;
+    creator: string;
     first_name: string;
     last_name: string;
     iban: string;

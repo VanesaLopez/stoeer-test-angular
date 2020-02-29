@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/models/user.model';
+import { AuthService } from 'angularx-social-login';
 
 @Component({
   selector: 'app-user-list',
@@ -9,9 +10,16 @@ import { User } from 'src/app/models/user.model';
 })
 export class UserListComponent implements OnInit {
 
+  public creator: string;
+
   constructor(
-    public userService: UserService
-  ) { }
+    public userService: UserService,
+    private authService: AuthService
+  ) { 
+    const sub = this.authService.authState.subscribe((user) => {
+      this.creator = user.authToken;
+    });
+  }
 
   ngOnInit(): void {    
     this.userService.getUserList();
