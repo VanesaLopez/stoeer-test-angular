@@ -4,6 +4,7 @@ import { UserRoutingModule } from './user-routing.module';
 import { UserListComponent } from './user-list/user-list.component';
 import { UserService } from 'src/app/services/user.service';
 import { HttpClientModule } from '@angular/common/http';
+import { ErrorAlertComponent } from '../error/error-alert/error-alert.component';
 
 @NgModule({
   imports: [
@@ -11,7 +12,10 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
     UserRoutingModule
   ],
-  declarations: [ UserListComponent ],
+  declarations: [ 
+    UserListComponent,
+    ErrorAlertComponent
+  ],
   providers: [ UserService ],
   exports: [ UserListComponent ]
 })

@@ -1,9 +1,9 @@
 <div class="container">
+    <app-error-alert *ngIf="userService.error"></app-error-alert>
     <table class="table">
         <caption>List of users</caption>
         <thead>
         <tr>
-            <th scope="col">#</th>
             <th scope="col">First</th>
             <th scope="col">Last</th>
             <th scope="col">IBAN</th>
@@ -13,10 +13,9 @@
         </thead>
         <tbody *ngIf="userService.userList$ | async as users; else loading">            
             <tr *ngFor="let user of users; trackBy: trackByFn">
-                <th scope="row">{{ user.id }}</th>
-                <td>{{ user.id }}</td>
-                <td>{{ user.id }}</td>
-                <td>{{ user.id }}</td>
+                <td>{{ user.first_name }}</td>
+                <td>{{ user.last_name }}</td>
+                <td>{{ user.iban }}</td>
                 <td></td>
                 <td></td>
             </tr>
