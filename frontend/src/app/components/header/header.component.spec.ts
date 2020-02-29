@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AuthService, AuthServiceConfig, GoogleLoginProvider } from 'angularx-social-login';
 import { LoginComponent } from '../login/login.component';
+import { By } from '@angular/platform-browser';
 
 const config = new AuthServiceConfig([
   {
@@ -63,5 +64,29 @@ describe('HeaderComponent', () => {
     component.ngOnDestroy();
 
     expect(unsubscribeSpy).toHaveBeenCalled();
+  });
+
+  it('should be viseble nav', () => {
+    component.loggedIn = true;
+    fixture.detectChanges();
+
+    const nav = fixture.debugElement.query(By.css('app-nav'));
+
+    expect(nav).toBeTruthy();
+  });
+
+  it('should not be viseble nav', () => {
+    component.loggedIn = false;
+    fixture.detectChanges();
+
+    const nav = fixture.debugElement.query(By.css('app-nav'));
+
+    expect(nav).toBeFalsy();
+  });
+
+  it('should be viseble login/logout', () => {
+    const login = fixture.debugElement.query(By.css('app-login'));
+
+    expect(login).toBeTruthy();
   });
 });
