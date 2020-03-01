@@ -60,7 +60,7 @@
         </div>
         <div class="form-row float-right mt-3">
           <button 
-            [disabled]="!userform.valid"
+            [disabled]="!userform.valid || this.notUpdate"
             class="btn btn-primary" 
             type="submit">
               {{ buttonSubmit }}

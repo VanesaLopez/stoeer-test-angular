@@ -7,16 +7,10 @@ import {map, tap, catchError} from 'rxjs/operators';
 @Injectable()
 export class AuthGuardService implements CanActivate {
 
-  private isLoggedIn: boolean;
-
   constructor(
     private authService: AuthService,
     private router: Router
-  ) {
-    this.authService.authState.subscribe((currentUser) => {
-      this.isLoggedIn = currentUser !== null;
-    });
-  }
+  ) {}
 
   canActivate(): Observable<boolean> | Promise<boolean> | boolean {
     return this.authService.authState.pipe(

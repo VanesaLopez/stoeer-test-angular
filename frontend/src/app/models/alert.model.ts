@@ -16,4 +16,9 @@ export class Alert {
         this.type = 'success';
         this.content = 'The user has been saved successfully.';
     }
+
+    setWarning() {
+        this.type = 'warning';
+        this.content = 'Update not allowed.'
+    }
 }
