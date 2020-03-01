@@ -1,4 +1,5 @@
 <div class="container">
+  <app-alert *ngIf="alert?.type" [type]="alert.type" [content]="alert.content"></app-alert>
     <form novalidate
         [formGroup]="userform"
         (ngSubmit)="onSubmit()">

@@ -4,7 +4,7 @@ import { UserRoutingModule } from './user-routing.module';
 import { UserListComponent } from './user-list/user-list.component';
 import { UserService } from 'src/app/services/user.service';
 import { HttpClientModule } from '@angular/common/http';
-import { ErrorAlertComponent } from '../error/error-alert/error-alert.component';
+import { AlertComponent } from '../alert/alert.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -18,7 +18,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   ],
   declarations: [ 
     UserListComponent,
-    ErrorAlertComponent,
+    AlertComponent,
     EditUserComponent
   ],
   providers: [ UserService ],
