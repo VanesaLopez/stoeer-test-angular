@@ -19,15 +19,15 @@
                 <td>
                     <button 
                         [disabled]="user.creator !== creator"
-                        class="btn btn-outline-primary btn-out" 
-                        (click)="edit(user)">
+                        class="btn btn-outline-primary btn-edit" 
+                        (click)="edit(user.id)">
                             Edit
                     </button>
                 </td>
                 <td>
                     <button 
                         [disabled]="user.creator !== creator"
-                        class="btn btn-outline-primary btn-out" 
+                        class="btn btn-outline-primary btn-delete" 
                         (click)="delete(user.id)">
                             Delete
                     </button>
