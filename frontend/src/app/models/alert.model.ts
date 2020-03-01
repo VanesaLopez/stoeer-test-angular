@@ -21,4 +21,9 @@ export class Alert {
         this.type = 'warning';
         this.content = 'Update not allowed.'
     }
+
+    setInfoDelete() {
+        this.type = 'success';
+        this.content = 'The user has been deleted successfully.';
+    }
 }

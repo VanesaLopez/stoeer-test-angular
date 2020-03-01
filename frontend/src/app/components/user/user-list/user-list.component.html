@@ -1,5 +1,6 @@
 <div class="container">
     <app-alert *ngIf="userService.error"></app-alert>
+    <app-alert *ngIf="alert?.type" [type]="alert.type" [content]="alert.content"></app-alert>
     <button 
         class="btn btn-outline-primary btn-add float-right mb-3" 
         (click)=addUser()>
@@ -33,7 +34,7 @@
                     <button 
                         [disabled]="user.creator !== creator"
                         class="btn btn-outline-primary btn-delete" 
-                        (click)="delete(user.id)">
+                        (click)="openDeleteModal(user.id)">
                             Delete
                     </button>
                 </td>
