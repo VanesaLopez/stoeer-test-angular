@@ -24,7 +24,6 @@ export class EditUserComponent implements OnInit, OnDestroy {
   iban: FormControl;
   buttonSubmit = 'Add User';
   alert: Alert = new Alert();
-  loading: boolean;
   notUpdate: boolean = false;
   private creator: string;
 
@@ -127,11 +126,9 @@ export class EditUserComponent implements OnInit, OnDestroy {
   }
 
   private getUser(id: number): void {
-    this.loading = true;
     const sub = this.userService.getUser(id).subscribe(
       (user) => {
         this.user = new User(user);
-        this.loading = false;
         this.buttonSubmit = 'Update User';
         this.canUpdate();
         this.createFormControls();
@@ -139,7 +136,6 @@ export class EditUserComponent implements OnInit, OnDestroy {
       },
       (error) => {
         this.alert.setError();
-        this.loading = false;
       }
     );
     this.subciptions.add(sub);
