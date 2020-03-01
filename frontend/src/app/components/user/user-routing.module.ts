@@ -3,10 +3,15 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { UserListComponent } from './user-list/user-list.component';
 import { AuthGuardService } from 'src/app/services/auth-guard.service';
+import { EditUserComponent } from './edit-user/edit-user.component';
 
 const userRoutes: Routes = [
     {
         path: 'users', component: UserListComponent,
+        canActivate: [AuthGuardService]
+    },
+    {
+        path: 'edit/:id', component: EditUserComponent,
         canActivate: [AuthGuardService]
     },
 ];
