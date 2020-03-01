@@ -11,7 +11,11 @@ const userRoutes: Routes = [
         canActivate: [AuthGuardService]
     },
     {
-        path: 'edit/:id', component: EditUserComponent,
+        path: 'users/edit/:id', component: EditUserComponent,
+        canActivate: [AuthGuardService]
+    },
+    {
+        path: 'users/add', component: EditUserComponent,
         canActivate: [AuthGuardService]
     },
 ];

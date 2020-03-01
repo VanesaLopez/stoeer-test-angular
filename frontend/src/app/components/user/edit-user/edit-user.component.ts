@@ -7,8 +7,7 @@ import { User } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-edit-user',
-  templateUrl: './edit-user.component.html',
-  styleUrls: ['./edit-user.component.sass']
+  templateUrl: './edit-user.component.html'
 })
 export class EditUserComponent implements OnInit, OnDestroy {
 
@@ -16,6 +15,7 @@ export class EditUserComponent implements OnInit, OnDestroy {
   first_name: FormControl;
   last_name: FormControl;
   iban: FormControl;
+  buttonSubmit = 'Add User';
 
   private subciptions: Subscription = new Subscription();
   private user: User = new User();
@@ -31,6 +31,7 @@ export class EditUserComponent implements OnInit, OnDestroy {
       if (userId) {
         this.userService.userList$.subscribe(users => {
           this.user = users[userId];
+          this.buttonSubmit = 'Update User';
         });
       } 
     });
@@ -48,7 +49,8 @@ export class EditUserComponent implements OnInit, OnDestroy {
     this.first_name = new FormControl(this.user.first_name, Validators.required);
     this.last_name = new FormControl(this.user.last_name, Validators.required);
     this.iban = new FormControl(this.user.iban, [
-      Validators.required
+      Validators.required,
+      Validators.pattern('ES[a-zA-Z0-9]{2}\s?([0-9]{4}\s?){5}\s?')
     ]);
   }
 
@@ -63,16 +65,36 @@ export class EditUserComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     if (this.userform.valid) {
-      const sub = this.userService.modifyUser(new User(this.userform.value)).subscribe(
-        () => {
-
-        },
-        () => {
-
-        }
-      );
-      this.subciptions.add(sub);
+      if (this.userform.value.id) {
+        this.modifyUser();
+      } else {
+        this.addUser();
+      }
     }
+  }
+
+  private modifyUser(): void {
+    const sub = this.userService.modifyUser(new User(this.userform.value)).subscribe(
+      () => {
+
+      },
+      () => {
+
+      }
+    );
+    this.subciptions.add(sub);
+  }
+
+  private addUser() {
+    const sub = this.userService.addUser(new User(this.userform.value)).subscribe(
+      () => {
+
+      },
+      () => {
+
+      }
+    );
+    this.subciptions.add(sub);
   }
 
 }
