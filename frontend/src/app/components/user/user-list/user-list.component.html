@@ -1,5 +1,10 @@
 <div class="container">
     <app-alert *ngIf="userService.error"></app-alert>
+    <button 
+        class="btn btn-outline-primary btn-add float-right mb-3" 
+        (click)=addUser()>
+       Add User
+    </button>
     <table class="table">
         <caption>List of users</caption>
         <thead>
