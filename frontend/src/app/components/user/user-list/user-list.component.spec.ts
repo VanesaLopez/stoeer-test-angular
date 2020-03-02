@@ -19,7 +19,7 @@ export function provideConfig() {
 }
 
 const userList = [
-  {id: 1, first_name: 'Jane', last_name: 'Smith', creator: 'xdfjj521112dg'}
+  {id: 1, first_name: 'Jane', last_name: 'Smith', own: true}
 ];
 
 describe('UserListComponent', () => {
@@ -34,7 +34,7 @@ describe('UserListComponent', () => {
         RouterTestingModule
       ],
       declarations: [ UserListComponent ],
-      providers: [ 
+      providers: [
         UserService,
         AuthService,
         {

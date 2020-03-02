@@ -1,8 +1,8 @@
 <div class="container">
     <app-alert *ngIf="userService.error"></app-alert>
     <app-alert *ngIf="alert?.type" [type]="alert.type" [content]="alert.content"></app-alert>
-    <button 
-        class="btn btn-outline-primary btn-add float-right mb-3" 
+    <button
+        class="btn btn-outline-primary btn-add float-right mb-3"
         (click)=addUser()>
        Add User
     </button>
@@ -17,23 +17,23 @@
             <th></th>
         </tr>
         </thead>
-        <tbody *ngIf="userService.userList$ | async as users; else loading">            
+        <tbody *ngIf="userService.userList$ | async as users; else loading">
             <tr *ngFor="let user of users; trackBy: trackByFn">
                 <td>{{ user.first_name }}</td>
                 <td>{{ user.last_name }}</td>
                 <td>{{ user.iban }}</td>
                 <td>
-                    <button 
-                        [disabled]="user.creator !== creator"
-                        class="btn btn-outline-primary btn-edit" 
+                    <button
+                        [disabled]="!user.own"
+                        class="btn btn-outline-primary btn-edit"
                         (click)="edit(user.id)">
                             Edit
                     </button>
                 </td>
                 <td>
-                    <button 
-                        [disabled]="user.creator !== creator"
-                        class="btn btn-outline-primary btn-delete" 
+                    <button
+                        [disabled]="!user.own"
+                        class="btn btn-outline-primary btn-delete"
                         (click)="openDeleteModal(user.id)">
                             Delete
                     </button>

@@ -1,11 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { User } from 'src/app/models/user.model';
 import { Alert } from 'src/app/models/alert.model';
-import { AuthService } from 'angularx-social-login';
 
 @Component({
   selector: 'app-edit-user',
@@ -25,37 +24,27 @@ export class EditUserComponent implements OnInit, OnDestroy {
   buttonSubmit = 'Add User';
   alert: Alert = new Alert();
   notUpdate: boolean = false;
-  private creator: string;
 
   private subciptions: Subscription = new Subscription();
   private user: User = new User();
 
   constructor(
     private userService: UserService,
-    private route: ActivatedRoute,
-    private router: Router,
-    private authService: AuthService
-  ) { 
-    
-    const sub = this.authService.authState.subscribe((user) => {
-      this.creator = user.authToken;
-    });
-    this.subciptions.add(sub);
+    private route: ActivatedRoute
+  ) {
   }
 
   ngOnInit() {
     const sub = this.route.paramMap.subscribe(params => {
       const userId = parseInt(params.get("id"));
       if (userId) {
-        // TODO: Decide where to get the user (api or service)
-        this.getUserFromService(userId);  
-        // this.getUser(userId);
+        this.getUser(userId);
       } else {
         this.createFormControls();
         this.createForm();
       }
     });
-    this.subciptions.add(sub);    
+    this.subciptions.add(sub);
   }
 
   ngOnDestroy() {
@@ -66,12 +55,12 @@ export class EditUserComponent implements OnInit, OnDestroy {
     this.first_name = new FormControl({
       value: this.user.first_name,
       disabled: this.notUpdate
-      }, 
+      },
       Validators.required);
     this.last_name = new FormControl({
       value: this.user.last_name,
       disabled: this.notUpdate
-      }, 
+      },
       Validators.required);
     this.iban = new FormControl({
       value: this.user.iban,
@@ -83,8 +72,8 @@ export class EditUserComponent implements OnInit, OnDestroy {
   }
 
   createForm() {
-    this.userform = new FormGroup({ 
-      id: new FormControl(this.user.id),   
+    this.userform = new FormGroup({
+      id: new FormControl(this.user.id),
       first_name: this.first_name,
       last_name: this.last_name,
       iban: this.iban
@@ -103,7 +92,9 @@ export class EditUserComponent implements OnInit, OnDestroy {
 
   private modifyUser(): void {
     const sub = this.userService.modifyUser(new User(this.userform.value)).subscribe(
-      () => {
+      (user) => {
+        this.userform.reset();
+        this.user = user;
         this.alert.setInfo();
       },
       (error) => {
@@ -115,7 +106,9 @@ export class EditUserComponent implements OnInit, OnDestroy {
 
   private addUser(): void {
     const sub = this.userService.addUser(new User(this.userform.value)).subscribe(
-      () => {
+      (user) => {
+        this.userform.reset();
+        this.user = user;
         this.alert.setInfo();
       },
       (error) => {
@@ -141,23 +134,8 @@ export class EditUserComponent implements OnInit, OnDestroy {
     this.subciptions.add(sub);
   }
 
-  private getUserFromService(id: number): void {
-    const sub = this.userService.userList$.subscribe(users => {
-      if (users[id]) {
-        this.user = users[id];
-        this.buttonSubmit = 'Update User';
-        this.canUpdate();
-        this.createFormControls();
-        this.createForm();
-      } else {
-        this.router.navigate(['/users']);
-      }
-    });
-    this.subciptions.add(sub);
-  }
-
   private canUpdate(): void {
-    if (this.user.creator === this.creator) {
+    if (this.user.own) {
       this.notUpdate = false;
     } else {
       this.notUpdate = true;

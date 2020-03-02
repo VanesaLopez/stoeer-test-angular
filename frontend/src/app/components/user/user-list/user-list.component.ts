@@ -21,7 +21,6 @@ import { Alert } from 'src/app/models/alert.model';
 })
 export class UserListComponent implements OnInit, OnDestroy {
 
-  public creator: string;
   public alert: Alert = new Alert();
   private subciptions: Subscription = new Subscription();
 
@@ -30,13 +29,9 @@ export class UserListComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private router: Router,
     private modalService: NgbModal
-  ) { 
-    const sub = this.authService.authState.subscribe((user) => {
-      this.creator = user.authToken;
-    });
-  }
+  ) {}
 
-  ngOnInit(): void {    
+  ngOnInit(): void {
     this.userService.getUserList();
   }
 
