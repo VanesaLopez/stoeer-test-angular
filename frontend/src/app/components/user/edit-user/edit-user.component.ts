@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { User } from 'src/app/models/user.model';
 import { Alert } from 'src/app/models/alert.model';
+import { ValidatorService } from 'src/app/validators/validator.service';
 
 @Component({
   selector: 'app-edit-user',
@@ -67,7 +68,7 @@ export class EditUserComponent implements OnInit, OnDestroy {
       disabled: this.notUpdate
       }, [
       Validators.required,
-      Validators.pattern('ES[a-zA-Z0-9]{2}\s?([0-9]{4}\s?){5}\s?')
+      ValidatorService.validateIban
     ]);
   }
 
