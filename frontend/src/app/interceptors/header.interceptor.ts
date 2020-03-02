@@ -13,10 +13,10 @@ export class HeaderInterceptor implements HttpInterceptor {
 
         this.authService.authState.subscribe((user) => {
             if (user != null) {
-                authToken = user.authToken;   
+                authToken = user.idToken;
             }
-        }); 
-        
+        });
+
         const authReq = req.clone({
             headers: new HttpHeaders({
               'Content-Type':  'application/json',
