@@ -18,10 +18,6 @@ export function provideConfig() {
   return config;
 }
 
-const userList = [
-  {id: 1, first_name: 'Jane', last_name: 'Smith', own: true}
-];
-
 describe('UserListComponent', () => {
   let component: UserListComponent;
   let fixture: ComponentFixture<UserListComponent>;
@@ -61,15 +57,13 @@ describe('UserListComponent', () => {
     userService.error = true;
     fixture.detectChanges();
 
-    const errorAlert = fixture.debugElement.query(By.css('app-error-alert'));
+    const errorAlert = fixture.debugElement.query(By.css('app-alert'));
 
     expect(errorAlert).toBeTruthy();
   });
 
   it('should not be error component', () => {
-    const userService = TestBed.get(UserService);
-
-    const errorAlert = fixture.debugElement.query(By.css('app-error-alert'));
+    const errorAlert = fixture.debugElement.query(By.css('app-alert'));
 
     expect(errorAlert).toBeFalsy();
   });
