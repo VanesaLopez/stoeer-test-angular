@@ -6,17 +6,8 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { AuthService, AuthServiceConfig, GoogleLoginProvider } from 'angularx-social-login';
 import { LoginComponent } from '../login/login.component';
 import { By } from '@angular/platform-browser';
+import { provideConfig } from 'src/app/config/social-login';
 
-const config = new AuthServiceConfig([
-  {
-    id: null,
-    provider: new GoogleLoginProvider("xxx")
-  }
-]);
-
-export function provideConfig() {
-  return config;
-}
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;

@@ -1,20 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LoginComponent } from './login.component';
-import { AuthService, AuthServiceConfig, GoogleLoginProvider } from 'angularx-social-login';
+import { AuthService, AuthServiceConfig } from 'angularx-social-login';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
-
-const config = new AuthServiceConfig([
-  {
-    id: null,
-    provider: new GoogleLoginProvider("xxx")
-  }
-]);
-
-export function provideConfig() {
-  return config;
-}
+import { provideConfig } from 'src/app/config/social-login';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;

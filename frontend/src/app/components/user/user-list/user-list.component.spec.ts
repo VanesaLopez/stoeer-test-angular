@@ -6,17 +6,7 @@ import { UserService } from 'src/app/services/user.service';
 import { By } from '@angular/platform-browser';
 import { AuthService, AuthServiceConfig, GoogleLoginProvider } from 'angularx-social-login';
 import { RouterTestingModule } from '@angular/router/testing';
-
-const config = new AuthServiceConfig([
-  {
-    id: null,
-    provider: new GoogleLoginProvider("xxx")
-  }
-]);
-
-export function provideConfig() {
-  return config;
-}
+import { provideConfig } from 'src/app/config/social-login';
 
 describe('UserListComponent', () => {
   let component: UserListComponent;
