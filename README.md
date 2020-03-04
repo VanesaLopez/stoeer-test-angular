@@ -15,7 +15,7 @@ We're using docker-etchosts to manage the hosts file entries. Check [GitHub](htt
 * Copy the repository content (please don't fork it so that there is no link to forked repositories someone might look up the solution at)
 * Start the containers ```docker-compose up``` 
 * Initialize the database ```docker-compose run django migrate```
-* Start fornt end unit test ```docker-compose run angular npm test```
+* Start frontend unit test ```docker-compose run angular npm test```
 
 # API endpoints
 
@@ -27,7 +27,7 @@ http://testcase.rh-dev.eu:8000/api/users to list and http://testcase.rh-dev.eu:8
 
 http://testcase.rh-dev.eu:8001
 
-# Fronend improvements
+# Frontend improvements
 
 * Add pagination
 * Create a mobile list user component
